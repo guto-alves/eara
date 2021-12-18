@@ -1,24 +1,24 @@
-<div class="container mt-5">
-    <h2>{{ topic.name }}</h2>
+<div class="container mt-4">
+    <h4>{{ topic.name }}</h4>
     <div class="card rounded">
         <div class="card-body">
             <h5 class="card-title">Sessões de estudos</h5>
             <table class="table table-ligth table-hover">
                 <thead>
                     <tr>
-                        <th scope="col"></th>
-                        <th scope="col"><i class="bi bi-hourglass-split text-warning"></i></th>
-                        <th scope="col"><i class="bi bi-check text-success"></i></th>
-                        <th scope="col"><i class="bi bi-x text-danger"></i></th>
-                        <th scope="col">Ações</th>
+                        <th>Sessão</th>
+                        <th title="Questões certas"><i class="bi bi-check text-success"></i></th>
+                        <th title="Questões erradas"><i class="bi bi-x text-danger"></i></th>
+                        <th title="Tempo"><i class="bi bi-hourglass-split text-warning"></i></th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let session of topic.sessions">
-                        <th scope="row">{{ session.id }}</th>
-                        <td>{{ session.totalTime }}</td>
+                    <tr *ngFor="let session of topic.sessions; let i = index">
+                        <td class="fw-bold">{{ i + 1 + '°'}}</td>
                         <td>{{ session.rightAnswers }}</td>
                         <td>{{ session.wrongAnswers }}</td>
+                        <td>{{ session.totalTime }}</td>
                         <td>
                             <button type="button" class="btn btn-sm btn-primary me-3"><i
                                     class="bi bi-pencil"></i></button>
@@ -29,7 +29,8 @@
             </table>
 
             <div class="d-flex justify-content-end">
-                <a class="btn btn-primary" [routerLink]="['/topic/' + topic.id + '/session']">Nova sessão de estudos</a>
+                <a class="btn btn-outline-primary btn-sm" [routerLink]="['/topic/' + topic.id + '/session']">
+                    <i class="bi bi-plus-circle-fill"></i> Nova sessão de estudos</a>
             </div>
         </div>
     </div>

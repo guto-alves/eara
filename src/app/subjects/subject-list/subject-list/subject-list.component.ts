@@ -32,7 +32,7 @@ export class SubjectListComponent implements OnInit {
         let subject = new Subject($(event.target).val());
 
         this.subjectService.addSubject(subject).subscribe({
-          next: (subject) => this.subjects.push(subject)
+          next: (newSubject) => this.subjects.push(newSubject)
         });
 
         $(newSubjectEl).hide();
@@ -43,12 +43,11 @@ export class SubjectListComponent implements OnInit {
   }
 
   addTopic(subjectId: number): void {
-    let subject = this.subjects.find((s) => s.id == subjectId);
+    const subject = this.subjects.find((s) => s.id == subjectId);
 
     if (subject != null) {
-      let newTopicInput = $('[data-subject-id="' + subjectId + '"]').find('.new-topic-input:first');
-      let topic: Topic = new Topic(newTopicInput.val());
-      console.log(topic);
+      const newTopicInput = $('[data-subject-id="' + subjectId + '"]').find('.new-topic-input:first');
+      const topic: Topic = new Topic(newTopicInput.val());
 
       this.subjectService.addTopic(subjectId, topic).subscribe({
         next: (topic) => {
