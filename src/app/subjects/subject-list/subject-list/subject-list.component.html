@@ -1,0 +1,61 @@
+<div class="container mt-5">
+
+    <h4 class="border-start border-primary border-5 ps-2 mb-5">Disciplinas</h4>
+
+    <div class="accordion" id="accordionExample">
+        <div *ngFor="let subject of subjects" class="accordion-item">
+            <h2 class="accordion-header" id="headingOne" [id]="'heading' + subject.name">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    [attr.data-bs-target]="'#collapse' + subject.name" aria-expanded="false"
+                    [attr.aria-controls]="'collapse' + subject.name">
+                    {{ subject.name }}
+                </button>
+            </h2>
+            <div id="collapseOne" [id]="'collapse' + subject.name" class="accordion-collapse collapse"
+                aria-labelledby="'headingOne" [attr.aria-labelledby]="'heading' + subject.name"
+                data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <ol class="topics list-group list-group-numbered">
+                        <li *ngFor="let topic of subject.topics"
+                            class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold"><a [routerLink]="['/topic/'+ topic.id]">{{ topic.name }}</a></div>
+                                Content for list item
+                            </div>
+                            <span class="badge bg-primary rounded-pill">14</span>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item accordion-item-base" style="display: none;">
+            <h2 class="accordion-header" id="headingThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    <div class="input-group me-5">
+                        <input type="text" class="new-subject-name-input m-0 form-control"
+                            placeholder="Nome da disciplina">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="bi bi-save"></i>
+                        </button>
+                    </div>
+                </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <ol class="topics list-group list-group-numbered"></ol>
+
+                    <div class="d-flex justify-content-end my-3">
+                        <button class="new-topic-button btn btn-primary" style="display: none !important;"
+                            (click)="addTopic()">Adicionar Tópico</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-end my-3">
+        <button class="btn btn-primary" (click)="addSubject()">Adicionar Disciplina</button>
+    </div>
+</div>

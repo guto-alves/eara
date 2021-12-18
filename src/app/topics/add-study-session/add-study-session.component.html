@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="card mt-4">
+        <h2 class="card-header bg-white text-center">Sessão de Estudo</h2>
+        <div class="card-body">
+            <form>
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="inputPassword" class="form-label">Tempo de estudo</label>
+                            <div class="col-sm-10">
+                                <input type="time" class="form-control" name="totalTime"
+                                    [(ngModel)]="studySession.totalTime">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="rightAnswers" class="form-label">Total de Questões Certas</label>
+                            <input type="number" class="form-control" placeholder="0" min="0"
+                                [(ngModel)]="studySession.rightAnswers" name="rightAnswers">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Total de Questões Erradas</label>
+                            <input type="number" class="form-control" placeholder="0" min="0"
+                                [(ngModel)]="studySession.wrongAnswers" name="wrongAnswers">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Observações sobre esta sessão de estudos</label>
+                    <textarea class="form-control" id="obs" name="obs" rows="2"
+                        [(ngModel)]="studySession.obs"></textarea>
+                </div>
+
+            </form>
+            <button type="button" (click)="saveSession()" class="btn btn-primary form-control">Salvar</button>
+        </div>
+    </div>
+</div>
