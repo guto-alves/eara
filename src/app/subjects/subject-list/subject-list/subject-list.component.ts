@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Topic } from 'src/app/topics/topic';
 import { Subject } from '../../subject';
 import { SubjectService } from '../../subject.service';
 
@@ -33,7 +34,7 @@ export class SubjectListComponent implements OnInit {
         this.subjectService.addSubject(subject).subscribe({
           next: (subject) => this.subjects.push(subject)
         });
-        
+
         $(newSubjectEl).hide();
       }
     });
@@ -41,8 +42,22 @@ export class SubjectListComponent implements OnInit {
     $(newSubjectEl).show();
   }
 
-  addTopic(): void {
+  addTopic(subjectId: number): void {
+    let subject = this.subjects.find((s) => s.id == subjectId);
 
+    if (subject != null) {
+      let newTopicInput = $('[data-subject-id="' + subjectId + '"]').find('.new-topic-input:first');
+      let topic: Topic = new Topic(newTopicInput.val());
+      console.log(topic);
+
+      this.subjectService.addTopic(subjectId, topic).subscribe({
+        next: (topic) => {
+          subject?.topics.push(topic);
+          newTopicInput.val('');
+        },
+        error: (e) => console.log(e)
+      });
+    }
   }
 }
 

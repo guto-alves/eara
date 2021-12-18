@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Topic } from '../topics/topic';
 import { Subject } from './subject';
 
 @Injectable({
@@ -17,5 +18,9 @@ export class SubjectService {
 
   addSubject(subject: Subject): Observable<Subject> {
     return this.http.post<Subject>(this.baseUrl, subject);
+  }
+
+  addTopic(subjectId: number, topic: Topic): Observable<Topic> {
+    return this.http.post<Topic>(this.baseUrl + '/' + subjectId + '/topics', topic);
   }
 }
