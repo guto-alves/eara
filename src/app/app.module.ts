@@ -4,6 +4,7 @@ import { FormsModule } from "@angular/forms";
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ProjectsModule } from "./projects/projects.module";
 import { SubjectsModule } from './subjects/subjects.module';
 import { TopicsModule } from './topics/topics.module';
 
@@ -18,7 +19,8 @@ import { TopicsModule } from './topics/topics.module';
     FormsModule,
     HttpClientModule,
     SubjectsModule,
-    TopicsModule
+    TopicsModule,
+    ProjectsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

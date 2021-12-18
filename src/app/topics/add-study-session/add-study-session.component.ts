@@ -14,6 +14,7 @@ export class AddStudySessionComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private router: Router, private topicService: TopicService) {
     this.studySession = new StudySession();
+    this.studySession.totalTime = '01:00';
   }
 
   ngOnInit(): void {

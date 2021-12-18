@@ -1,6 +1,6 @@
 <div class="container mt-5">
 
-    <h4 class="border-start border-primary border-5 ps-2 mb-4">Disciplinas</h4>
+    <h4 class="border-start border-primary border-5 ps-2 mb-4">{{ project.name }} - Disciplinas</h4>
 
     <div class="accordion" id="subjectsAccordion">
         <div *ngFor="let subject of subjects" class="accordion-item" attr.data-subject-id="{{subject.id}}">

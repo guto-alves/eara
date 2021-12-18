@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Project } from 'src/app/projects/project';
+import { ProjectService } from 'src/app/projects/project.service';
 import { Topic } from 'src/app/topics/topic';
 import { Subject } from '../../subject';
 import { SubjectService } from '../../subject.service';
@@ -12,16 +14,28 @@ declare var $: any;
   styleUrls: ['./subject-list.component.css']
 })
 export class SubjectListComponent implements OnInit {
+  project: Project = new Project();
   subjects: Subject[] = [];
 
-  constructor(private subjectService: SubjectService, private router: Router) {
+  constructor(private router: Router, private route: ActivatedRoute, private subjectService: SubjectService, private projectService: ProjectService) {
   }
 
   ngOnInit(): void {
-    this.subjectService.getSubjects().subscribe({
-      next: (subjects) => this.subjects = subjects,
-      error: (e) => console.log(e),
-    });
+    const projectId = this.route.snapshot.paramMap.get('id');
+
+    if (projectId != null) {
+      this.projectService.getProject(parseInt(projectId)).subscribe({
+        next: (project) => {
+          this.project = project;
+
+          this.projectService.getProjectSubjects(project).subscribe({
+            next: (subjects) => this.subjects = subjects,
+            error: (e) => console.log(e),
+          });
+        }
+      });
+    }
+
   }
 
   addSubject(): void {
@@ -30,6 +44,7 @@ export class SubjectListComponent implements OnInit {
     $(newSubjectEl).find('.new-subject-name-input').keyup((event: any) => {
       if (event.which == 13) {
         let subject = new Subject($(event.target).val());
+        subject.project = this.project;
 
         this.subjectService.addSubject(subject).subscribe({
           next: (newSubject) => this.subjects.push(newSubject)
