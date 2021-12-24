@@ -1,15 +1,15 @@
-//Install express server
-const express = require('express');
-const path = require('path');
+//Importa as dependências que acabamos de instalar
+const express = require("express");
+const path = require("path");
 
 const app = express();
 
-// Serve only the static files form the dist directory
-app.use(express.static('./dist/ciclo-eara'));
+// Serve os arquivos estáticos da pasta dist (gerada pelo ng build)
+app.use(express.static(__dirname + "/dist/eara"));
 
-app.get('/*', (req, res) =>
-    res.sendFile('index.html', {root: 'dist/ciclo-eara/'}),
-);
+app.get("/*", function (req, res) {
+  res.sendFile(path.join(__dirname + "/dist/eara/index.html"));
+});
 
-// Start the app by listening on the default Heroku port
-app.listen(process.env.PORT || 8080);
+// Inicia a aplicação pela porta configurada
+app.listen(process.env.PORT || 4200);
