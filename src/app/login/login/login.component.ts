@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   error?: string;
 
   constructor(private route: ActivatedRoute, private router: Router, private authenticationService: AuthenticationService) {
-    if (this.authenticationService.currentUserValue.token) {
+    if (this.authenticationService.currentUserValue) {
       this.router.navigate(['/projects']);
     }
   }

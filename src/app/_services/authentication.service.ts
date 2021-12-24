@@ -9,15 +9,20 @@ import { UserService } from './user.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
-    private currentUserSubject: BehaviorSubject<User>;
+    private currentUserSubject: BehaviorSubject<any>;
     public currentUser: Observable<User>;
 
     constructor(private http: HttpClient, private userService: UserService) {
-        this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser') || '{}'));
+        if (localStorage.getItem('currentUser') != null) {
+            this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser') || '{}'));
+        } else {
+            this.currentUserSubject = new BehaviorSubject<any>(null);
+        }
+
         this.currentUser = this.currentUserSubject.asObservable();
     }
 
-    public get currentUserValue(): User {
+    public get currentUserValue(): any {
         return this.currentUserSubject.value;
     }
 
@@ -46,13 +51,12 @@ export class AuthenticationService {
                         this.userService.getLoggedInUser().subscribe({
                             next: (user) => {
                                 user.token = this.currentUserSubject.value.token;
+                                localStorage.setItem('currentUser', JSON.stringify(user));
                                 this.currentUserSubject.next(user);
                                 observer.next();
                             },
                             error: (error) => observer.error(error)
                         });
-
-                        return result;
                     },
                     error: (error) => observer.error(error)
                 });
@@ -61,6 +65,6 @@ export class AuthenticationService {
 
     logout() {
         localStorage.removeItem('currentUser');
-        this.currentUserSubject.next(new User());
+        this.currentUserSubject.next(null);
     }
 }

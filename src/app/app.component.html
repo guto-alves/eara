@@ -11,14 +11,19 @@
                     <a class="nav-link active" aria-current="page" href="#" routerLink="projects">Dashboard</a>
                 </li>
             </ul>
-            <div class="dropdown">
+            <div *ngIf="!isAuthenticated">
+                <a class="btn btn-outline-light me-3" [routerLink]="'login'">Entrar</a>
+            </div>
+            <div class="dropdown" *ngIf="isAuthenticated">
                 <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1"
                     data-bs-toggle="dropdown" aria-expanded="false">
-                    Gustavo
+                    {{ currentUser.name }}
                 </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
                     <li><a class="dropdown-item" href="#">Editar perfil</a></li>
-                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
                     <li><a class="dropdown-item" href="#">Ajuda</a></li>
                     <li><a class="dropdown-item" href="#" (click)="logout()">Sair</a></li>
                 </ul>
