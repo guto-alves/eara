@@ -7,6 +7,7 @@
                 <thead>
                     <tr>
                         <th>Sessão</th>
+                        <th>Data</th>
                         <th title="Questões certas"><i class="bi bi-check text-success"></i></th>
                         <th title="Questões erradas"><i class="bi bi-x text-danger"></i></th>
                         <th title="Tempo"><i class="bi bi-hourglass-split text-warning"></i></th>
@@ -15,7 +16,8 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let session of topic.sessions; let i = index">
-                        <td class="fw-bold">{{ i + 1 + '°'}}</td>
+                        <td class="fw-bold">{{ i + 1 + '°' }} </td>
+                        <td>{{ session.creationDate | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
                         <td>{{ session.rightAnswers }}</td>
                         <td>{{ session.wrongAnswers }}</td>
                         <td>{{ session.totalTime }}</td>
