@@ -15,7 +15,8 @@ const routes: Routes = [
   { path: 'projects', component: ProjectsComponent, canActivate: [AuthGuard] },
   { path: 'projects/:id', component: SubjectListComponent, canActivate: [AuthGuard] },
   { path: 'topic/:id', component: TopicDetailComponent, canActivate: [AuthGuard] },
-  { path: 'topic/:id/session', component: AddStudySessionComponent, canActivate: [AuthGuard] }
+  { path: 'topic/:id/session', component: AddStudySessionComponent, canActivate: [AuthGuard] },
+  { path: '**', redirectTo: 'projects' }
 ];
 
 @NgModule({
