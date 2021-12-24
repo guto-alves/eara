@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { User } from '../../_models/user';
 
+declare var $: any;
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -26,6 +28,10 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/projects';
+
+    if (this.route.snapshot.queryParams['action'] == 'firstLogin') {
+      $('#successAlert').show();
+    }
   }
 
   isValidFields(): boolean {

@@ -4,7 +4,7 @@ import { TopicDetailComponent } from './topic-detail/topic-detail.component';
 import { TopicService } from '../_services/topic.service';
 import { AddStudySessionComponent } from './add-study-session/add-study-session.component';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StudySessionEditComponent } from './study-session-edit/study-session-edit.component';
 
 
@@ -18,7 +18,8 @@ import { StudySessionEditComponent } from './study-session-edit/study-session-ed
   imports: [
     CommonModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [TopicService]
 })

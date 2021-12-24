@@ -6,21 +6,20 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProjectsModule } from "./projects/projects.module";
 import { TopicsModule } from './topics/topics.module';
-import { LoginComponent } from './login/login/login.component';
 import { JwtInterceptor } from "./_utils/jwt.interceptor";
 import { ErrorInterceptor } from "./_utils/error.interceptor";
+import { LoginModule } from "./login/login.module";
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LoginComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule,
     HttpClientModule,
+    LoginModule,
     ProjectsModule,
     TopicsModule
   ],
