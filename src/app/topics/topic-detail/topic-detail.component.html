@@ -1,6 +1,6 @@
-<div class="container mt-4">
+<div class="container col-md-8 mt-4 mb-4">
     <h4>{{ topic.name }}</h4>
-    <div class="card rounded">
+    <div class="card rounded ">
         <div class="card-body">
             <h5 class="card-title">Sessões de estudos</h5>
             <table class="table table-ligth table-hover">
@@ -11,21 +11,34 @@
                         <th title="Questões certas"><i class="bi bi-check text-success"></i></th>
                         <th title="Questões erradas"><i class="bi bi-x text-danger"></i></th>
                         <th title="Tempo"><i class="bi bi-hourglass-split text-warning"></i></th>
-                        <th>Ações</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let session of topic.sessions; let i = index">
-                        <td class="fw-bold">{{ i + 1 + '°' }} </td>
+                        <td>{{ i + 1 + '°' }} </td>
                         <td>{{ session.creationDate | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
                         <td>{{ session.rightAnswers }}</td>
                         <td>{{ session.wrongAnswers }}</td>
                         <td>{{ session.totalTime }}</td>
                         <td>
-                            <a type="button" class="btn btn-sm btn-primary me-3"
-                                [routerLink]="['/topic/' + topic.id + '/session/' + session.id + '/edit']"><i
-                                    class="bi bi-pencil"></i></a>
-                            <button type="button" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
+                            <div class="dropdown">
+                                <button class="btn btn-transparent btn-sm" type="button" id="dropdownMenuButton"
+                                    data-bs-toggle="dropdown" aria-expanded="false"
+                                    [id]="'dropdownMenuButton' + session.id">
+                                    <i class="bi bi-three-dots"></i>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton"
+                                    [attr.aria-labelledby]="'dropdownMenuButton' + session.id">
+                                    <li><a class="dropdown-item" href="#"
+                                            [routerLink]="['/topic/' + topic.id + '/session/' + session.id + '/edit']">Editar</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item"
+                                            (click)="showDeleteConfirmModal(session.id)">Remover</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </td>
                     </tr>
                 </tbody>
@@ -34,6 +47,26 @@
             <div class="d-flex justify-content-end">
                 <a class="btn btn-outline-primary btn-sm" [routerLink]="['/topic/' + topic.id + '/session']">
                     <i class="bi bi-plus-circle-fill"></i> Nova sessão de estudos</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="confirmDeleteSessionModal" tabindex="-1"
+        aria-labelledby="confirmDeleteSessionModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmDeleteSessionModalLabel">Excluir Sessão de Estudo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Tem certeza de que deseja excluir a sessão de estudo?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" (click)="deleteStudySession()">Remover</button>
+                </div>
             </div>
         </div>
     </div>

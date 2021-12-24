@@ -20,4 +20,7 @@ export class StudySessionService {
     return this.http.put<StudySession>(this.baseUrl + '/' + session.id, session);
   }
 
+  deleteStudySession(id: number): Observable<void> {
+    return this.http.delete<void>(this.baseUrl + '/' + id);
+  }
 }
