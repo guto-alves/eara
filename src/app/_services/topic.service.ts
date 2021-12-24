@@ -20,4 +20,5 @@ export class TopicService {
   addStudySession(topicId: number, session: StudySession): Observable<StudySession> {
     return this.http.post<StudySession>(this.baseUrl + '/' + topicId + '/sessions', session);
   }
+
 }

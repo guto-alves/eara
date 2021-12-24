@@ -22,8 +22,9 @@
                         <td>{{ session.wrongAnswers }}</td>
                         <td>{{ session.totalTime }}</td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-primary me-3"><i
-                                    class="bi bi-pencil"></i></button>
+                            <a type="button" class="btn btn-sm btn-primary me-3"
+                                [routerLink]="['/topic/' + topic.id + '/session/' + session.id + '/edit']"><i
+                                    class="bi bi-pencil"></i></a>
                             <button type="button" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
                         </td>
                     </tr>
