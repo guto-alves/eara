@@ -5,7 +5,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProjectsModule } from "./projects/projects.module";
-import { SubjectsModule } from './subjects/subjects.module';
 import { TopicsModule } from './topics/topics.module';
 import { LoginComponent } from './login/login/login.component';
 import { JwtInterceptor } from "./_utils/jwt.interceptor";
@@ -22,9 +21,8 @@ import { ErrorInterceptor } from "./_utils/error.interceptor";
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    SubjectsModule,
-    TopicsModule,
-    ProjectsModule
+    ProjectsModule,
+    TopicsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

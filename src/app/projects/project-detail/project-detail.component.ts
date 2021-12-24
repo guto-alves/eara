@@ -1,23 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from 'src/app/_models/project';
-import { ProjectService } from 'src/app/_services/project.service';
+import { Subject } from 'src/app/_models/subject';
 import { Topic } from 'src/app/_models/topic';
-import { Subject } from '../../../_models/subject';
-import { SubjectService } from '../../../_services/subject.service';
+import { ProjectService } from 'src/app/_services/project.service';
+import { SubjectService } from 'src/app/_services/subject.service';
 
 declare var $: any;
 
 @Component({
-  selector: 'app-subject-list',
-  templateUrl: './subject-list.component.html',
-  styleUrls: ['./subject-list.component.css']
+  selector: 'app-project-detail',
+  templateUrl: './project-detail.component.html',
+  styleUrls: ['./project-detail.component.css']
 })
-export class SubjectListComponent implements OnInit {
+export class ProjectDetailComponent implements OnInit {
+
   project: Project = new Project();
   subjects: Subject[] = [];
 
-  constructor(private router: Router, private route: ActivatedRoute, private subjectService: SubjectService, private projectService: ProjectService) {
+  constructor(private router: Router, private route: ActivatedRoute,
+    private subjectService: SubjectService, private projectService: ProjectService) {
   }
 
   ngOnInit(): void {
@@ -73,6 +75,5 @@ export class SubjectListComponent implements OnInit {
       });
     }
   }
+
 }
-
-

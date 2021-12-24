@@ -1,20 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProjectService } from '../_services/project.service';
-import { ProjectsComponent } from './projects/projects.component';
-import { SubjectsModule } from '../subjects/subjects.module';
 import { FormsModule } from '@angular/forms';
+import { ProjectDetailComponent } from './project-detail/project-detail.component';
+import { RouterModule } from '@angular/router';
+import { ProjectsComponent } from './projects/projects.component';
 
 
 
 @NgModule({
   declarations: [
-    ProjectsComponent
+    ProjectsComponent,
+    ProjectDetailComponent
   ],
   imports: [
     CommonModule,
-    FormsModule,
-    SubjectsModule
+    RouterModule,
+    FormsModule
   ],
   providers: [
     ProjectService
