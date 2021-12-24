@@ -1,0 +1,32 @@
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-body">
+            <h2 class="card-title text-center">EARA LOGIN</h2>
+
+            <div id="errorAlert" class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="error">
+                {{error}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            <form>
+                <div class="mb-3">
+                    <label for="email" class="form-label">E-mail</label>
+                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
+                        [(ngModel)]="user.email" [formControl]="email" required>
+                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Senha</label>
+                    <input type="password" class="form-control" id="password" [(ngModel)]="user.password"
+                        [formControl]="password" required>
+                </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                </div>
+                <button type="submit" class="btn btn-primary" [disabled]="!isValidFields()"
+                    (click)="login()">Entrar</button>
+            </form>
+        </div>
+    </div>
+</div>

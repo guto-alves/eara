@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/login/user.service';
 import { Project } from '../project';
 import { ProjectService } from '../project.service';
 
@@ -14,7 +15,7 @@ export class ProjectsComponent implements OnInit {
   projects: Project[] = []
   project: Project = new Project();
 
-  constructor(private projectService: ProjectService, private router: Router) { }
+  constructor(private router: Router, private userService: UserService, private projectService: ProjectService) { }
 
   ngOnInit(): void {
     this.projectService.getProjects().subscribe({
@@ -31,6 +32,7 @@ export class ProjectsComponent implements OnInit {
         $('#newProjectModal').modal('toggle');
       },
       error: (e) => {
+        console.log(e);
         $('#newProjectModal .alert').show();
       }
     });
