@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SubjectListComponent } from './subject-list/subject-list/subject-list.component';
 import { RouterModule } from '@angular/router';
-import { SubjectService } from './subject.service';
+import { SubjectService } from '../_services/subject.service';
 
 
 @NgModule({

@@ -8,15 +8,16 @@ import { User } from '../_models/user';
   providedIn: 'root'
 })
 export class UserService {
+  private baseUrl = environment.apiUrl + '/users';
 
   constructor(private http: HttpClient) { }
 
   register(user: User): Observable<User> {
-    return this.http.post<User>(environment.apiUrl + '/users', user);
+    return this.http.post<User>(this.baseUrl, user);
   }
 
   getLoggedInUser(): Observable<User> {
-    return this.http.get<User>(environment.apiUrl + '/users/me');
+    return this.http.get<User>(this.baseUrl + '/me');
   }
 
 }

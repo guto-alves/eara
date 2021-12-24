@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Topic } from '../topic';
-import { TopicService } from '../topic.service';
+import { Topic } from '../../_models/topic';
+import { TopicService } from '../../_services/topic.service';
 
 @Component({
   selector: 'app-topic-detail',

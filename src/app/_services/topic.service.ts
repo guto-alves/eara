@@ -1,14 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { StudySession } from './study-session';
-import { Topic } from './topic';
+import { environment } from 'src/environments/environment';
+import { StudySession } from '../_models/study-session';
+import { Topic } from '../_models/topic';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TopicService {
-  private baseUrl = 'http://localhost:8080/topics';
+  private baseUrl = environment.apiUrl + '/topics';
+
   constructor(private http: HttpClient) { }
 
   getTopicById(id: number): Observable<Topic> {

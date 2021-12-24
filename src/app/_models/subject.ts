@@ -1,5 +1,5 @@
-import { Project } from "../projects/project";
-import { Topic } from "../topics/topic";
+import { Project } from "./project";
+import { Topic } from "./topic";
 
 export class Subject {
     id: number = 0;

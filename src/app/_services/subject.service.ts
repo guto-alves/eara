@@ -1,20 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Topic } from '../topics/topic';
-import { Subject } from './subject';
+import { Topic } from '../_models/topic';
+import { Subject } from '../_models/subject';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SubjectService {
-  private baseUrl = 'http://localhost:8080/subjects'
+  private baseUrl = environment.apiUrl + '/subjects';
 
   constructor(private http: HttpClient) { }
-
-  getSubjects(): Observable<Subject[]> {
-    return this.http.get<Subject[]>(this.baseUrl);
-  }
 
   addSubject(subject: Subject): Observable<Subject> {
     return this.http.post<Subject>(this.baseUrl, subject);

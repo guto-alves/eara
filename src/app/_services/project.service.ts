@@ -1,14 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Subject } from '../subjects/subject';
-import { Project } from './project';
+import { Subject } from '../_models/subject';
+import { Project } from '../_models/project';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectService {
-  private baseUrl = 'http://localhost:8080/projects';
+  private baseUrl = environment.apiUrl + '/projects';
 
   constructor(private http: HttpClient) { }
 

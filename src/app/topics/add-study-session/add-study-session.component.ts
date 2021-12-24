@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { StudySession } from '../study-session';
-import { TopicService } from '../topic.service';
+import { StudySession } from '../../_models/study-session';
+import { TopicService } from '../../_services/topic.service';
 
 @Component({
   selector: 'app-add-study-session',

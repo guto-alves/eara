@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Project } from 'src/app/projects/project';
-import { ProjectService } from 'src/app/projects/project.service';
-import { Topic } from 'src/app/topics/topic';
-import { Subject } from '../../subject';
-import { SubjectService } from '../../subject.service';
+import { Project } from 'src/app/_models/project';
+import { ProjectService } from 'src/app/_services/project.service';
+import { Topic } from 'src/app/_models/topic';
+import { Subject } from '../../../_models/subject';
+import { SubjectService } from '../../../_services/subject.service';
 
 declare var $: any;
 

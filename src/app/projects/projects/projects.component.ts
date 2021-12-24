@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from 'src/app/login/user.service';
-import { Project } from '../project';
-import { ProjectService } from '../project.service';
+import { UserService } from 'src/app/_services/user.service';
+import { Project } from '../../_models/project';
+import { ProjectService } from '../../_services/project.service';
 
 declare var $: any;
 
