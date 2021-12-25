@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class ProjectService {
-  private baseUrl = environment.apiUrl + '/projects';
+  private baseUrl = environment.REST_API_URL + '/projects';
 
   constructor(private http: HttpClient) { }
 

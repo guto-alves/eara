@@ -30,7 +30,7 @@ export class AuthenticationService {
         return new Observable<void>((observer) => {
             const headers = new HttpHeaders({
                 'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': `Basic ${btoa('eara:eara')}`
+                'Authorization': `Basic ${btoa(environment.CLIENT_ID + ':' + environment.CLIENT_SECRET)}`
             });
 
             const body = new URLSearchParams();
@@ -38,7 +38,7 @@ export class AuthenticationService {
             body.set('password', password);
             body.set('grant_type', 'password');
 
-            this.http.post<AuthResult>(`${environment.apiUrl}/oauth/token`, body, {
+            this.http.post<AuthResult>(`${environment.REST_API_URL}/oauth/token`, body, {
                 headers: headers
             })
                 .subscribe({

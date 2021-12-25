@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8080'
+  REST_API_URL: 'http://localhost:8080',
+  CLIENT_ID: 'eara',
+  CLIENT_SECRET: 'eara'
 };
 
 /*

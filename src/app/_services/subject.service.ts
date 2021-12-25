@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class SubjectService {
-  private baseUrl = environment.apiUrl + '/subjects';
+  private baseUrl = environment.REST_API_URL + '/subjects';
 
   constructor(private http: HttpClient) { }
 

@@ -8,7 +8,7 @@ import { StudySession } from '../_models/study-session';
   providedIn: 'root'
 })
 export class StudySessionService {
-  private baseUrl = environment.apiUrl + '/sessions';
+  private baseUrl = environment.REST_API_URL + '/sessions';
 
   constructor(private http: HttpClient) { }
 

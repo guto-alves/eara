@@ -9,7 +9,7 @@ import { Topic } from '../_models/topic';
   providedIn: 'root'
 })
 export class TopicService {
-  private baseUrl = environment.apiUrl + '/topics';
+  private baseUrl = environment.REST_API_URL + '/topics';
 
   constructor(private http: HttpClient) { }
 
