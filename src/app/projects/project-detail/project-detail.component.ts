@@ -36,25 +36,28 @@ export class ProjectDetailComponent implements OnInit {
         }
       });
     }
-  }
 
-  addSubject(): void {
-    let newSubjectEl: any = $('.accordion-item-base');
-
-    $(newSubjectEl).find('.new-subject-name-input').keyup((event: any) => {
+    $('#newSubjectInput').keyup((event: any) => {
       if (event.which == 13) {
-        let subject = new Subject($(event.target).val());
+        const subject = new Subject($(event.target).val());
         subject.project = this.project;
 
         this.subjectService.addSubject(subject).subscribe({
-          next: (newSubject) => this.subjects.push(newSubject)
+          next: (newSubject) => this.subjects.push(newSubject),
+          error: (error) => console.log(error)
         });
 
-        $(newSubjectEl).hide();
+        $('.accordion-item-base').hide();
       }
     });
 
-    $(newSubjectEl).show();
+    $('#cancelNewSubjectButton').click(function () {
+      $('.accordion-item-base').hide();
+    });
+  }
+
+  addSubject(): void {
+    $('.accordion-item-base').show();
   }
 
   addTopic(subjectId: number): void {
