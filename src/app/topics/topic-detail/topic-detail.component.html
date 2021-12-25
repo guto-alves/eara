@@ -1,26 +1,46 @@
 <div class="container col-md-8 mt-4 mb-4">
-    <h4>{{ topic.name }}</h4>
-    <div class="card rounded ">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="#" [routerLink]="'/projects/' +topic.subject?.project?.id">
+                    {{ topic.subject?.project?.name }}</a>
+            </li>
+            <li class="breadcrumb-item" aria-current="page">
+                <a>{{ topic.subject?.name }}</a>
+            </li>
+        </ol>
+    </nav>
+
+    <h4 class="border-5 border-start border-primary ps-2 my-3">{{ topic.name }}</h4>
+
+    <div class="card">
+        <h5 class="card-header bg-white text-center">Sessões de estudos</h5>
         <div class="card-body">
-            <h5 class="card-title">Sessões de estudos</h5>
-            <table class="table table-ligth table-hover">
+            <table class="table table-hover text-center">
                 <thead>
-                    <tr>
-                        <th>Sessão</th>
-                        <th>Data</th>
-                        <th title="Questões certas"><i class="bi bi-check text-success"></i></th>
-                        <th title="Questões erradas"><i class="bi bi-x text-danger"></i></th>
-                        <th title="Tempo"><i class="bi bi-hourglass-split text-warning"></i></th>
+                    <tr class="align-middle">
                         <th></th>
+                        <th class="mt-1">Data</th>
+                        <th title="Total questões acertadas" style="font-size: 1.5em;">
+                            <i class="bi bi-check2 text-success"></i>
+                        </th>
+                        <th title="Total questões erradas" style="font-size: 1.5rem;">
+                            <i class="bi bi-x-lg text-danger"></i>
+                        </th>
+                        <th title="Total de sessões de estudo" style="font-size: 1.5rem;">
+                            <i class="bi bi-list text-warning"></i>
+                        <th title="Total tempo estudado" style="font-size: 1.5rem;">
+                            <i class="bi bi-hourglass-split text-info"></i>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let session of topic.sessions; let i = index">
+                    <tr *ngFor="let session of topic.sessions; let i = index" class="align-middle">
                         <td>{{ i + 1 + '°' }} </td>
                         <td>{{ session.creationDate | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
-                        <td>{{ session.rightAnswers }}</td>
-                        <td>{{ session.wrongAnswers }}</td>
-                        <td>{{ session.totalTime }}</td>
+                        <td class="fw-bold text-success">{{ session.rightAnswers }}</td>
+                        <td class="fw-bold text-danger">{{ session.wrongAnswers }}</td>
+                        <td class="fw-bold">{{ session.totalTime }}</td>
                         <td>
                             <div class="dropdown">
                                 <button class="btn btn-transparent btn-sm" type="button" id="dropdownMenuButton"
@@ -41,12 +61,22 @@
                             </div>
                         </td>
                     </tr>
+                    <tr class="align-middle fw-bold">
+                        <td></td>
+                        <td>Totais</td>
+                        <td class="text-success">{{ topic.totalRightAnswers }}</td>
+                        <td class="text-danger">{{ topic.totalWrongAnswers }}</td>
+                        <td>{{ topic.totalTime }}</td>
+                        <td>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
 
             <div class="d-flex justify-content-end">
-                <a class="btn btn-outline-primary btn-sm" [routerLink]="['/topic/' + topic.id + '/session']">
-                    <i class="bi bi-plus-circle-fill"></i> Nova sessão de estudos</a>
+                <a class="btn btn-primary btn-sm" [routerLink]="['/topic/' + topic.id + '/session']"
+                    title="Adicionar nova sessão de estudos">
+                    <i class="bi bi-plus-lg"></i></a>
             </div>
         </div>
     </div>

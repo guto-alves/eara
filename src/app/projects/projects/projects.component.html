@@ -17,12 +17,12 @@
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newProjectModal"
             title="Adicionar projeto">
-            <i class="bi bi-plus-circle"></i>
+            <i class="bi bi-plus-lg"></i>
         </button>
         <!-- Modal -->
         <div class="modal fade" id="newProjectModal" tabindex="-1" aria-labelledby="newProjectModalLabel"
             aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="newProjectModalLabel">Novo Projeto</h5>
@@ -40,7 +40,7 @@
                                 <label for="name" class="form-label">Nome do Projeto</label>
                                 <input class="form-control" type="text" name="name"
                                     placeholder="Ex.: ENEM, Concurso, Faculdade, ..." maxlength="60" required
-                                    [(ngModel)]="project.name">
+                                    onclick="this.select();" [(ngModel)]="project.name">
                             </div>
                             <div class="mb-3">
                                 <label for="name" class="form-label">Descrição (opcional)</label>

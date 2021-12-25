@@ -29,11 +29,11 @@ export class TopicDetailComponent implements OnInit {
       this.topicService.getTopicById(parseInt(topicId)).subscribe({
         next: (topic) => {
           this.topic = topic;
+          console.log(topic);
         },
         error: (e) => console.log(e),
       });
     }
-
   }
 
   showDeleteConfirmModal(studySessionId: number) {
@@ -45,8 +45,25 @@ export class TopicDetailComponent implements OnInit {
     this.studySessionService.deleteStudySession(this.studySessionIdDeleted).subscribe({
       next: () => {
         const studySessionIndex = this.topic.sessions.findIndex(session => session.id == this.studySessionIdDeleted);
+        const st = this.topic.sessions[studySessionIndex];
 
         this.topic.sessions.splice(studySessionIndex, 1);
+        this.topic.totalRightAnswers -= st.rightAnswers;
+        this.topic.totalWrongAnswers -= st.wrongAnswers;
+
+        const currenthh = parseInt(this.topic.totalTime.split(':')[0]);
+        const currentmm = parseInt(this.topic.totalTime.split(':')[1]);
+
+        const removedhh = parseInt(st.totalTime.split(':')[0]);
+        const removedmm = parseInt(st.totalTime.split(':')[1]);
+
+        this.topic.totalTime = (currenthh - removedhh).toLocaleString('en-US', {
+          minimumIntegerDigits: 2,
+          useGrouping: false
+        }) + ':' + (currentmm - removedmm).toLocaleString('en-US', {
+          minimumIntegerDigits: 2,
+          useGrouping: false
+        });
 
         this.studySessionIdDeleted = -1;
 

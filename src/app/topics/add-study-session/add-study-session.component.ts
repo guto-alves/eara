@@ -21,6 +21,7 @@ export class AddStudySessionComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     if (id != null) {
       this.topicId = parseInt(id);
+      this.studySession.topic.id = this.topicId;
     }
   }
 

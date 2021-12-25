@@ -1,6 +1,14 @@
-<div class="container mt-5">
+<div class="container mt-4">
 
-    <h4 class="border-start border-primary border-5 ps-2 mb-4">{{ project.name }} - Disciplinas</h4>
+    <div class="card mb-4">
+        <div
+            class="card-body bg-white border-start border-top border-end border-bottom border-primary border-2 rounded">
+            <h5>{{ project.name }}</h5>
+            <span>{{ project.description }} </span>
+        </div>
+    </div>
+
+    <h5>Disciplinas</h5>
 
     <div class="accordion" id="subjectsAccordion">
         <div *ngFor="let subject of subjects" class="accordion-item" attr.data-subject-id="{{subject.id}}">
@@ -15,35 +23,45 @@
                 aria-labelledby="'headingOne" [attr.aria-labelledby]="'heading' + subject.id"
                 data-bs-parent="#subjectsAccordion">
                 <div class="accordion-body">
-                    <table class="table table-ligth table-sm table-hover text-center">
+                    <table class="table table-sm table-hover text-center">
                         <thead>
-                            <tr>
-                                <th>Tópico</th>
-                                <th title="Total questões acertadas"><i class="bi bi-check text-success"></i></th>
-                                <th title="Total questões erradas"><i class="bi bi-x-lg text-danger"></i></th>
-                                <th title="Total de sessões de estudo"><i class="bi bi-list text-warning"></i>
-                                <th title="Total tempo estudado"><i class="bi bi-hourglass-split text-warning"></i>
+                            <tr class="align-middle">
+                                <th class="mt-1 text-center">Tópico</th>
+                                <th title="Total questões acertadas" style="font-size: 1.5em;">
+                                    <i class="bi bi-check2 text-success"></i>
+                                </th>
+                                <th title="Total questões erradas" style="font-size: 1.5rem;">
+                                    <i class="bi bi-x-lg text-danger"></i>
+                                </th>
+                                <th title="Total de sessões de estudo" style="font-size: 1.5rem;">
+                                    <i class="bi bi-list text-warning"></i>
+                                <th title="Total de tempo estudado" style="font-size: 1.5rem;">
+                                    <i class="bi bi-alarm text-info"></i>
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let topic of subject.topics">
-                                <td class="align-middle fw-bold text-start"><a [routerLink]="['/topic/'+ topic.id]">{{
-                                        topic.name
-                                        }}</a>
+                            <tr *ngFor="let topic of subject.topics" class="align-middle fw-bold">
+                                <td class="text-start">
+                                    <a [routerLink]="['/topic/'+ topic.id]">{{ topic.name }}</a>
                                 </td>
-                                <td class="align-middle">{{ topic.totalRightAnswers }}</td>
-                                <td class="align-middle">{{ topic.totalWrongAnswers }}</td>
-                                <td class="align-middle">{{ topic.totalSessions }}</td>
-                                <td class="align-middle">{{ topic.totalTime }}</td>
+                                <td class="  text-success">{{ topic.totalRightAnswers }}</td>
+                                <td class="text-danger">{{ topic.totalWrongAnswers }}</td>
+                                <td>{{ topic.totalSessions }}</td>
+                                <td>{{ topic.totalTime }}</td>
                             </tr>
                         </tbody>
+
                     </table>
 
+                    <small *ngIf="subject.topics.length == 0">
+                        Esta disciplina não tem nenhum tópico ainda
+                    </small>
+
                     <div class="d-flex justify-content-end">
-                        <input type="text" class="new-topic-input form-control w-25 me-2" placeholder="Nome do tópico">
-                        <button type="button" class="btn btn-primary" (click)="addTopic(subject.id)"
-                            title="Adicionar novo tópico"><i class="bi bi-plus-circle-fill"></i></button>
+                        <input type="text" class="new-topic-input form-control w-50" placeholder="Nome do tópico">
+                        <button type="button" class="btn btn-primary btn-sm" (click)="addTopic(subject.id)"
+                            title="Adicionar novo tópico"><i class="bi bi-plus-lg"></i></button>
                     </div>
                 </div>
             </div>
@@ -76,6 +94,7 @@
     </div>
 
     <div class="d-flex justify-content-end my-3">
-        <button class="btn btn-primary" (click)="addSubject()">Adicionar Disciplina</button>
+        <button class="btn btn-primary" (click)="addSubject()"><i class="bi bi-plus-lg"></i> Adicionar
+            Disciplina</button>
     </div>
 </div>

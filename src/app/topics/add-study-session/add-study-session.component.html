@@ -1,6 +1,6 @@
-<div class="container">
-    <div class="card mt-4">
-        <h2 class="card-header bg-white text-center">Sessão de Estudo</h2>
+<div class="container col-md-8 mt-4">
+    <div class="card">
+        <h4 class="card-header bg-white text-center">Sessão de Estudo</h4>
         <div class="card-body">
             <form>
                 <div class="row mb-3">
@@ -36,7 +36,11 @@
                 </div>
 
             </form>
-            <button type="button" (click)="saveSession()" class="btn btn-primary form-control">Salvar</button>
+            <div class="d-flex justify-content-center col-md-4 mx-auto">
+                <a type="button" [routerLink]="['/topic/' + studySession.topic.id]"
+                    class="btn btn-secondary me-4">Voltar</a>
+                <button type="button" (click)="saveSession()" class="btn btn-primary">Salvar</button>
+            </div>
         </div>
     </div>
 </div>

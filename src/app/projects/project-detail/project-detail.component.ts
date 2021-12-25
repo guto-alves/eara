@@ -14,7 +14,6 @@ declare var $: any;
   styleUrls: ['./project-detail.component.css']
 })
 export class ProjectDetailComponent implements OnInit {
-
   project: Project = new Project();
   subjects: Subject[] = [];
 
@@ -37,7 +36,6 @@ export class ProjectDetailComponent implements OnInit {
         }
       });
     }
-
   }
 
   addSubject(): void {

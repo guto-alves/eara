@@ -1,6 +1,6 @@
-<div class="container">
-    <div class="card mt-4">
-        <h2 class="card-header bg-white text-center">Atualizar Sessão de Estudo</h2>
+<div class="container col-md-8 mt-4">
+    <div class="card">
+        <h4 class="card-header bg-white text-center">Atualizar Sessão de Estudo</h4>
         <div class="card-body">
             <form>
                 <div class="row mb-3">
@@ -36,9 +36,9 @@
                 </div>
             </form>
             <div class="d-flex justify-content-center col-md-4 mx-auto">
-                <button type="button" (click)="updateSession()" class="btn btn-sm btn-primary me-4">Atualizar</button>
                 <a type="button" [routerLink]="['/topic/' + studySession.topic.id]"
-                    class="btn btn-sm btn-danger">Voltar</a>
+                    class="btn btn-secondary me-4">Voltar</a>
+                <button type="button" (click)="updateSession()" class="btn btn-primary">Atualizar</button>
             </div>
         </div>
     </div>
