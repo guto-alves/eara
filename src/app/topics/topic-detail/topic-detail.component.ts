@@ -27,10 +27,7 @@ export class TopicDetailComponent implements OnInit {
 
     if (topicId != null) {
       this.topicService.getTopicById(parseInt(topicId)).subscribe({
-        next: (topic) => {
-          this.topic = topic;
-          console.log(topic);
-        },
+        next: (topic) => this.topic = topic,
         error: (e) => console.log(e),
       });
     }

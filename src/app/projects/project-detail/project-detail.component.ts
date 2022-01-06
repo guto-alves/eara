@@ -37,6 +37,14 @@ export class ProjectDetailComponent implements OnInit {
       });
     }
 
+    $(document).keyup((e: any) => {
+      if (e.altKey && e.key === 'n') {
+        this.addSubject();
+      } else if (e.which == 13 && $(".new-topic-input:focus").length > 0) {
+        this.addTopic($('.new-topic-input:focus').closest('[data-subject-id]').data('subject-id'));
+      }
+    });
+
     $('#newSubjectInput').keyup((event: any) => {
       if (event.which == 13) {
         const subject = new Subject($(event.target).val());
@@ -58,6 +66,7 @@ export class ProjectDetailComponent implements OnInit {
 
   addSubject(): void {
     $('.accordion-item-base').show();
+    $('input').focus();
   }
 
   addTopic(subjectId: number): void {
@@ -71,6 +80,7 @@ export class ProjectDetailComponent implements OnInit {
         next: (topic) => {
           subject?.topics.push(topic);
           newTopicInput.val('');
+          newTopicInput.focus();
         },
         error: (e) => console.log(e)
       });
