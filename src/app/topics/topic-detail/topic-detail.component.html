@@ -2,7 +2,8 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="#" [routerLink]="'/projects/' +topic.subject?.project?.id">
+                <a class="fw-bold" href="#" [routerLink]="'/projects/' +topic.subject?.project?.id"
+                    [style.color]="topic.subject?.project?.color">
                     {{ topic.subject?.project?.name }}</a>
             </li>
             <li class="breadcrumb-item" aria-current="page">

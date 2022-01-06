@@ -29,6 +29,9 @@ export class ProjectDetailComponent implements OnInit {
         next: (project) => {
           this.project = project;
 
+          localStorage.setItem('color', this.project.color || '#0d6efd');
+          $('nav').attr('style', `background-color: ${project.color} !important`);
+
           this.projectService.getProjectSubjects(project).subscribe({
             next: (subjects) => this.subjects = subjects,
             error: (e) => console.log(e),

@@ -1,9 +1,8 @@
 <div class="container mt-4">
-
     <div class="card mb-4">
-        <div
-            class="card-body bg-white border-start border-top border-end border-bottom border-primary border-2 rounded">
-            <h5>{{ project.name }}</h5>
+        <div class="card-body bg-white border-start border-top border-end border-bottom border-2 rounded"
+            [style.border-color]="project.color + ' !important'">
+            <h5 class="fw-bold">{{ project.name }}</h5>
             <span>{{ project.description }} </span>
         </div>
     </div>
