@@ -7,12 +7,7 @@ export class Subject {
     topics: Topic[] = [];
     project: Project = new Project();
 
-    constructor(name: string) {
+    constructor(name: string = '') {
         this.name = name;
-    }
-
-    getNameId(): string {
-        //return this.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-        return this.name.replace(/\//g, "_"); // "1399_06_08"
     }
 }

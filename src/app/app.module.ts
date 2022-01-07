@@ -9,6 +9,7 @@ import { TopicsModule } from './topics/topics.module';
 import { JwtInterceptor } from "./_utils/jwt.interceptor";
 import { ErrorInterceptor } from "./_utils/error.interceptor";
 import { LoginModule } from "./login/login.module";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { LoginModule } from "./login/login.module";
     HttpClientModule,
     LoginModule,
     ProjectsModule,
-    TopicsModule
+    TopicsModule,
+    NgbModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

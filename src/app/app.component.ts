@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
   currentUser: User;
   isAuthenticated: boolean = false;
 
-  constructor(private router: Router, private authenticationService: AuthenticationService) {
+  constructor(private authenticationService: AuthenticationService) {
     this.currentUser = this.authenticationService.currentUserValue;
 
     authenticationService.currentUser.subscribe({

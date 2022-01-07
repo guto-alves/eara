@@ -4,7 +4,7 @@
 
     <div class="row row-cols-1 row-cols-md-3 g-4 mb-3">
         <div class="col" *ngFor="let project of projects">
-            <div class="card h-100" style="cursor: pointer;" (click)="goToProject(project.id)"
+            <div class="card h-100 border-2" style="cursor: pointer;" (click)="goToProject(project.id)"
                 [style.border-color]="project.color + ' !important'">
                 <div class="card-body">
                     <h5 class="card-title fw-bold">{{ project.name }}</h5>
@@ -15,54 +15,45 @@
     </div>
 
     <div class="d-flex justify-content-end">
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newProjectModal"
-            title="Adicionar projeto">
+        <ng-template #content let-modal>
+            <div class="modal-header">
+                <h5 class="modal-title" id="newProjectModalTitle">Novo Projeto</h5>
+                <button type="button" class="btn-close" aria-label="Close"
+                    (click)="modal.dismiss('Cross click')"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none;">
+                        <span id="alertMessage">Erro ao criar projeto!</span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+
+                    <ngb-alert type="danger" *ngIf="newProjectErrorMessage" (closed)="newProjectErrorMessage = ''">{{
+                        newProjectErrorMessage }}</ngb-alert>
+
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Nome do Projeto</label>
+                        <input class="form-control" type="text" name="name" placeholder="ENEM, Concurso, Faculdade, ..."
+                            maxlength="60" required onclick="this.select();" [(ngModel)]="project.name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Descrição (opcional)</label>
+                        <textarea class="form-control" type="text" name="description" [(ngModel)]="project.description"
+                            placeholder="Sobre o que é seu projeto?"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="color" class="form-label">Color Tema</label>
+                        <input class="form-control" type="color" name="color" [(ngModel)]="project.color">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="addProject()" ngbAutofocus>Criar</button>
+            </div>
+        </ng-template>
+
+        <button class="btn btn-primary" title="Criar projeto" (click)="openModal(content)">
             <i class="bi bi-plus-lg"></i>
         </button>
-        <!-- Modal -->
-        <div class="modal fade" id="newProjectModal" tabindex="-1" aria-labelledby="newProjectModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="newProjectModalLabel">Novo Projeto</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert"
-                                style="display: none;">
-                                <span id="alertMessage">Erro ao criar projeto!</span>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Nome do Projeto</label>
-                                <input class="form-control" type="text" name="name"
-                                    placeholder="Ex.: ENEM, Concurso, Faculdade, ..." maxlength="60" required
-                                    onclick="this.select();" [(ngModel)]="project.name">
-                            </div>
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Descrição (opcional)</label>
-                                <textarea class="form-control" type="text" name="description"
-                                    [(ngModel)]="project.description"></textarea>
-                            </div>
-                            <div class="mb-3">
-                                <input type="color" name="color" [(ngModel)]="project.color">
-                            </div>
-
-                            <div></div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary" (click)="addProject()">Salvar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
-
 </div>

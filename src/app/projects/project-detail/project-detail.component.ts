@@ -15,10 +15,13 @@ declare var $: any;
 })
 export class ProjectDetailComponent implements OnInit {
   project: Project = new Project();
+
   subjects: Subject[] = [];
 
+  showSubjectForm = false;
+
   constructor(private router: Router, private route: ActivatedRoute,
-    private subjectService: SubjectService, private projectService: ProjectService) {
+    private projectService: ProjectService, private subjectService: SubjectService) {
   }
 
   ngOnInit(): void {
@@ -34,60 +37,37 @@ export class ProjectDetailComponent implements OnInit {
 
           this.projectService.getProjectSubjects(project).subscribe({
             next: (subjects) => this.subjects = subjects,
-            error: (e) => console.log(e),
+            error: (e) => console.log(e)
           });
-        }
-      });
-    }
-
-    $(document).keyup((e: any) => {
-      if (e.altKey && e.key === 'n') {
-        this.addSubject();
-      } else if (e.which == 13 && $(".new-topic-input:focus").length > 0) {
-        this.addTopic($('.new-topic-input:focus').closest('[data-subject-id]').data('subject-id'));
-      }
-    });
-
-    $('#newSubjectInput').keyup((event: any) => {
-      if (event.which == 13) {
-        const subject = new Subject($(event.target).val());
-        subject.project = this.project;
-
-        this.subjectService.addSubject(subject).subscribe({
-          next: (newSubject) => this.subjects.push(newSubject),
-          error: (error) => console.log(error)
-        });
-
-        $('.accordion-item-base').hide();
-      }
-    });
-
-    $('#cancelNewSubjectButton').click(function () {
-      $('.accordion-item-base').hide();
-    });
-  }
-
-  addSubject(): void {
-    $('.accordion-item-base').show();
-    $('input').focus();
-  }
-
-  addTopic(subjectId: number): void {
-    const subject = this.subjects.find((s) => s.id == subjectId);
-
-    if (subject != null) {
-      const newTopicInput = $('[data-subject-id="' + subjectId + '"]').find('.new-topic-input:first');
-      const topic: Topic = new Topic(newTopicInput.val());
-
-      this.subjectService.addTopic(subjectId, topic).subscribe({
-        next: (topic) => {
-          subject?.topics.push(topic);
-          newTopicInput.val('');
-          newTopicInput.focus();
         },
-        error: (e) => console.log(e)
+        error: (e) => this.router.navigate(['/projects'])
       });
     }
+  }
+
+  addSubject(subjectName: string): void {
+    const subject = new Subject(subjectName);
+    subject.project = this.project;
+
+    this.subjectService.addSubject(subject).subscribe({
+      next: (newSubject) => {
+        this.subjects.push(newSubject);
+        this.showSubjectForm = true;
+      },
+      error: (error) => console.log(error)
+    });
+  }
+
+  addTopic(topicName: string, subjectId: number): void {
+    const topic = new Topic(topicName);
+
+    this.subjectService.addTopic(subjectId, topic).subscribe({
+      next: (newTopic) => {
+        const subject = this.subjects.find((s) => s.id == subjectId);
+        subject?.topics.push(newTopic);
+      },
+      error: (error) => console.log(error)
+    });
   }
 
 }

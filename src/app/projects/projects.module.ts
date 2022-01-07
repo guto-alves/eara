@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
 import { RouterModule } from '@angular/router';
 import { ProjectsComponent } from './projects/projects.component';
+import { NgbAccordionModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -16,7 +17,9 @@ import { ProjectsComponent } from './projects/projects.component';
   imports: [
     CommonModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    NgbAccordionModule,
+    NgbAlertModule
   ],
   providers: [
     ProjectService

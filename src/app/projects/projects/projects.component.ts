@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from 'src/app/_services/user.service';
+import { NgbAlert, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Project } from '../../_models/project';
 import { ProjectService } from '../../_services/project.service';
-
-declare const $: any;
 
 @Component({
   selector: 'app-projects',
@@ -15,7 +13,9 @@ export class ProjectsComponent implements OnInit {
   projects: Project[] = []
   project: Project = new Project();
 
-  constructor(private router: Router, private userService: UserService, private projectService: ProjectService) { }
+  newProjectErrorMessage = '';
+
+  constructor(private router: Router, private projectService: ProjectService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.projectService.getProjects().subscribe({
@@ -24,32 +24,29 @@ export class ProjectsComponent implements OnInit {
     });
   }
 
+  goToProject(projectId: number): void {
+    this.router.navigate(['projects/' + projectId]);
+  }
+
+  openModal(content: any) {
+    this.modalService.open(content, { centered: true });
+  }
+
   addProject(): void {
     if (this.isLightColor(this.project.color)) {
-      this.showErrorAlert('Escolha uma cor uma pouco mais escura!');
+      this.newProjectErrorMessage = 'Escolha uma cor uma pouco mais escura!';
       return;
     }
 
     this.projectService.addProject(this.project).subscribe({
       next: (project) => {
         this.projects.push(project);
-        $('#newProjectModal .alert').hide();
-        $('#newProjectModal').modal('toggle');
+        this.modalService.dismissAll();
       },
-      error: (e) => {
-        console.log(e);
-        this.showErrorAlert('Erro ao criar projeto. Verifique os campos e tente novamente!');
+      error: (error) => {
+        this.newProjectErrorMessage = error;
       }
     });
-  }
-
-  goToProject(projectId: number): void {
-    this.router.navigate(['projects/' + projectId]);
-  }
-
-  private showErrorAlert(message: string): void {
-    $('#newProjectModal #alertMessage').text(message);
-    $('#newProjectModal .alert').show();
   }
 
   isLightColor(c: string): boolean {
