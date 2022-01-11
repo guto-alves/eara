@@ -13,14 +13,14 @@ export class AppComponent implements OnInit {
   currentUser: User;
   isAuthenticated: boolean = false;
 
-  constructor(private authenticationService: AuthenticationService) {
+  constructor(private router: Router, private authenticationService: AuthenticationService) {
     this.currentUser = this.authenticationService.currentUserValue;
 
     authenticationService.currentUser.subscribe({
       next: (user) => {
         this.currentUser = user;
         this.isAuthenticated = this.currentUser != null;
-      },
+      }
     });
   }
 
@@ -34,5 +34,6 @@ export class AppComponent implements OnInit {
 
   logout(): void {
     this.authenticationService.logout();
+    this.router.navigate(['/']);
   }
 }
