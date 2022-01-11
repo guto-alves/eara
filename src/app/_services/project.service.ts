@@ -17,6 +17,10 @@ export class ProjectService {
     return this.http.post<Project>(this.baseUrl, project);
   }
 
+  updateProject(project: Project): Observable<void> {
+    return this.http.put<void>(this.baseUrl + '/' + project.id, project);
+  }
+
   getProjects(): Observable<Project[]> {
     return this.http.get<Project[]>(this.baseUrl);
   }

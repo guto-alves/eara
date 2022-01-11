@@ -33,7 +33,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   addProject(): void {
-    if (this.isLightColor(this.project.color)) {
+    if (Project.isLightColor(this.project.color)) {
       this.newProjectErrorMessage = 'Escolha uma cor uma pouco mais escura!';
       return;
     }
@@ -47,18 +47,6 @@ export class ProjectsComponent implements OnInit {
         this.newProjectErrorMessage = error;
       }
     });
-  }
-
-  isLightColor(c: string): boolean {
-    c = c.substring(1);      // strip #
-    let rgb = parseInt(c, 16);   // convert rrggbb to decimal
-    let r = (rgb >> 16) & 0xff;  // extract red
-    let g = (rgb >> 8) & 0xff;  // extract green
-    let b = (rgb >> 0) & 0xff;  // extract blue
-
-    const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; // per ITU-R BT.709
-
-    return luma > 200;
   }
 
 }

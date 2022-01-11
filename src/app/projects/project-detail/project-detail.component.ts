@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Project } from 'src/app/_models/project';
 import { Subject } from 'src/app/_models/subject';
 import { Topic } from 'src/app/_models/topic';
@@ -15,13 +16,17 @@ declare var $: any;
 })
 export class ProjectDetailComponent implements OnInit {
   project: Project = new Project();
+  projectUpdated: Project = new Project();
 
   subjects: Subject[] = [];
 
   showSubjectForm = false;
 
+  newProjectErrorMessage = '';
+
   constructor(private router: Router, private route: ActivatedRoute,
-    private projectService: ProjectService, private subjectService: SubjectService) {
+    private projectService: ProjectService, private subjectService: SubjectService,
+    private modalService: NgbModal) {
   }
 
   ngOnInit(): void {
@@ -32,8 +37,7 @@ export class ProjectDetailComponent implements OnInit {
         next: (project) => {
           this.project = project;
 
-          localStorage.setItem('color', this.project.color || '#0d6efd');
-          $('nav').attr('style', `background-color: ${project.color} !important`);
+          this.cloneProject(this.projectUpdated, project);
 
           this.projectService.getProjectSubjects(project).subscribe({
             next: (subjects) => this.subjects = subjects,
@@ -68,6 +72,36 @@ export class ProjectDetailComponent implements OnInit {
       },
       error: (error) => console.log(error)
     });
+  }
+
+  openModal(content: any) {
+    this.modalService.open(content, { centered: true });
+  }
+
+  updateProject(): void {
+    if (Project.isLightColor(this.projectUpdated.color)) {
+      this.newProjectErrorMessage = 'Escolha uma cor uma pouco mais escura!';
+      return;
+    }
+
+    this.projectService.updateProject(this.projectUpdated).subscribe({
+      next: () => {
+        this.cloneProject(this.project, this.projectUpdated);
+        this.modalService.dismissAll();
+      },
+      error: (e) => {
+        this.newProjectErrorMessage = e;
+      }
+    });
+  }
+
+  private cloneProject(project1: Project, project2: Project) {
+    project1.id = project2.id;
+    project1.name = project2.name;
+    project1.description = project2.description;
+    project1.color = project2.color;
+    localStorage.setItem('color', this.project.color || '#0d6efd');
+    $('nav').attr('style', `background-color: ${this.project.color} !important`);
   }
 
 }

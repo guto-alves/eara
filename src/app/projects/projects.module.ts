@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
 import { RouterModule } from '@angular/router';
 import { ProjectsComponent } from './projects/projects.component';
-import { NgbAccordionModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAccordionModule, NgbAlertModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -19,7 +19,8 @@ import { NgbAccordionModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
     RouterModule,
     FormsModule,
     NgbAccordionModule,
-    NgbAlertModule
+    NgbAlertModule,
+    NgbDropdownModule
   ],
   providers: [
     ProjectService
