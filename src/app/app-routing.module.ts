@@ -7,6 +7,7 @@ import { ProjectsComponent } from './projects/projects/projects.component';
 import { AddStudySessionComponent } from './topics/add-study-session/add-study-session.component';
 import { StudySessionEditComponent } from './topics/study-session-edit/study-session-edit.component';
 import { TopicDetailComponent } from './topics/topic-detail/topic-detail.component';
+import { UserProfileEditComponent } from './users/user-profile-edit/user-profile-edit.component';
 import { AuthGuard } from './_utils/auth.guard';
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'topic/:id', component: TopicDetailComponent, canActivate: [AuthGuard] },
   { path: 'topic/:id/session', component: AddStudySessionComponent, canActivate: [AuthGuard] },
   { path: 'topic/:topicId/session/:sessionId/edit', component: StudySessionEditComponent, canActivate: [AuthGuard] },
+  { path: 'user', component: UserProfileEditComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: 'projects' }
 ];
 

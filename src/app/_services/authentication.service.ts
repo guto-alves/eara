@@ -45,14 +45,13 @@ export class AuthenticationService {
                     next: (result) => {
                         const user = new User();
                         user.token = result.access_token;
-                        localStorage.setItem('currentUser', JSON.stringify(user));
-                        this.currentUserSubject.next(user);
+
+                        this.updateCurrentUser(user);
 
                         this.userService.getLoggedInUser().subscribe({
                             next: (user) => {
                                 user.token = this.currentUserSubject.value.token;
-                                localStorage.setItem('currentUser', JSON.stringify(user));
-                                this.currentUserSubject.next(user);
+                                this.updateCurrentUser(user);
                                 observer.next();
                             },
                             error: (error) => observer.error(error)
@@ -63,8 +62,14 @@ export class AuthenticationService {
         });
     }
 
-    logout() {
+    logout(): void {
         localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);
     }
+
+    updateCurrentUser(user: User) {
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        this.currentUserSubject.next(user);
+    }
+
 }
