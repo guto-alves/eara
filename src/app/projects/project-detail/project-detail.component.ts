@@ -95,6 +95,18 @@ export class ProjectDetailComponent implements OnInit {
     });
   }
 
+  deleteProject(): void {
+    this.projectService.deleteProject(this.project.id).subscribe({
+      next: () => {
+        this.modalService.dismissAll();
+        this.router.navigate(['projects']);
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    });
+  }
+
   private cloneProject(project1: Project, project2: Project) {
     project1.id = project2.id;
     project1.name = project2.name;
