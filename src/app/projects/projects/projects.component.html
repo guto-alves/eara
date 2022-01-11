@@ -9,6 +9,9 @@
                     <h5 class="card-title fw-bold">{{ project.name }}</h5>
                     <p class="card-text">{{ project.description}}</p>
                 </div>
+                <div class="card-footer bg-white text-end">
+                    <small class="text-muted">{{project.accessDate | timeAgo }}</small>
+                </div>
             </div>
         </div>
     </div>
@@ -27,8 +30,9 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
 
-                    <ngb-alert type="danger" *ngIf="newProjectErrorMessage" (closed)="newProjectErrorMessage = ''">{{
-                        newProjectErrorMessage }}</ngb-alert>
+                    <ngb-alert type="danger" *ngIf="newProjectErrorMessage" (closed)="newProjectErrorMessage = ''">
+                        {{ newProjectErrorMessage }}
+                    </ngb-alert>
 
                     <div class="mb-3">
                         <label for="name" class="form-label">Nome do Projeto</label>

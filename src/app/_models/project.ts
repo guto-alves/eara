@@ -3,6 +3,7 @@ export class Project {
     name: string = '';
     description?: string;
     color: string = '#0d6efd';
+    accessDate: string = '';
 
     static isLightColor(c: string): boolean {
         c = c.substring(1);      // strip #

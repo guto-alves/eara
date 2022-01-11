@@ -6,13 +6,15 @@ import { ProjectDetailComponent } from './project-detail/project-detail.componen
 import { RouterModule } from '@angular/router';
 import { ProjectsComponent } from './projects/projects.component';
 import { NgbAccordionModule, NgbAlertModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { TimeAgoPipe } from '../_utils/time-ago-pipe';
 
 
 
 @NgModule({
   declarations: [
     ProjectsComponent,
-    ProjectDetailComponent
+    ProjectDetailComponent,
+    TimeAgoPipe
   ],
   imports: [
     CommonModule,
