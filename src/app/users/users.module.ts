@@ -4,12 +4,14 @@ import { UserProfileEditComponent } from './user-profile-edit/user-profile-edit.
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+import { UserAccountEditComponent } from './user-account-edit/user-account-edit.component';
 
 
 
 @NgModule({
   declarations: [
-    UserProfileEditComponent
+    UserProfileEditComponent,
+    UserAccountEditComponent
   ],
   imports: [
     CommonModule,

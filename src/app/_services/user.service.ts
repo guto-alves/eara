@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Account } from '../_models/account';
 import { User } from '../_models/user';
 
 @Injectable({
@@ -22,6 +23,10 @@ export class UserService {
 
   updateUser(user: User): Observable<void> {
     return this.http.put<void>(this.baseUrl, user);
+  }
+
+  changePassword(account: Account) {
+    return this.http.post<void>(this.baseUrl + '/change-password', account);
   }
 
 }

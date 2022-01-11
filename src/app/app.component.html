@@ -18,12 +18,13 @@
                 <a class="btn btn-outline-light me-3" [routerLink]="'login'">Entrar</a>
             </div>
 
-            <div ngbDropdown class="d-inline-block" *ngIf="isAuthenticated">
+            <div ngbDropdown class="d-inline-block" display="dynamic" placement="bottom-right" *ngIf="isAuthenticated">
                 <button class="btn btn-outline-light me-3" id="userOptionsDropdown" ngbDropdownToggle>
                     {{ currentUser.name }}
                 </button>
                 <div ngbDropdownMenu aria-labelledby="userOptionsDropdown">
-                    <a ngbDropdownItem href="#" routerLink="user">Editar perfil</a>
+                    <a ngbDropdownItem href="#" routerLink="user/edit-profile">Editar perfil</a>
+                    <a ngbDropdownItem href="#" routerLink="user/edit-account">Configurações da Conta</a>
                     <div class="dropdown-divider"></div>
                     <a ngbDropdownItem href="#">Ajuda</a>
                     <button ngbDropdownItem (click)="logout()">Sair</button>

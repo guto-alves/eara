@@ -1,0 +1,43 @@
+<div class="container col-md-5 my-4">
+    <ngb-alert *ngIf="alertSuccessMessage" (closed)="alertSuccessMessage = ''" type="success">
+        {{ alertSuccessMessage }}
+    </ngb-alert>
+
+    <ngb-alert *ngIf="alertErrorMessage" (closed)="alertErrorMessage = ''" type="danger">
+        {{ alertErrorMessage }}
+    </ngb-alert>
+
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title text-center mb-3">Conta</h3>
+            <p class="text-center">Edite suas configurações de conta e altere sua senha aqui.</p>
+
+            <hr>
+            <form>
+                <div class="mb-3">
+                    <label for="email" class="form-label fw-bold">E-mail</label>
+                    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp"
+                        [value]="account.email" disabled>
+                    <div id="emailHelp" class="form-text">Nunca compartilharemos seu e-mail com mais ninguém.</div>
+                </div>
+                <hr>
+                <div class="mb-4">
+                    <label for="password" class="form-label fw-bold">Senha</label>
+                    <input type="password" class="form-control" placeholder="Digite a senha atual" id="password"
+                        name="password" [(ngModel)]="account.password" required min="4">
+                </div>
+                <div class="mb-4">
+                    <input type="password" class="form-control" id="newPassword" name="newPassword"
+                        [(ngModel)]="account.newPassword" required placeholder="Digite a nova senha" minlength="4">
+                </div>
+                <div class="mb-4">
+                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
+                        placeholder="Confirme a nova senha" [(ngModel)]="account.confirmPassword" required>
+                </div>
+                <div class="d-grid col-md-6 mx-auto mb-3">
+                    <button type="submit" class="btn btn-primary" (click)="updatePassword()">Alterar a senha</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
