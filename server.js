@@ -13,3 +13,4 @@ app.get("/*", function (req, res) {
 
 // Inicia a aplicação pela porta configurada
 app.listen(process.env.PORT || 4200);
+console.log(process.env.REST_API_URL);
