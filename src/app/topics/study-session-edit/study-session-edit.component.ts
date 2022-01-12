@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { StudySession } from 'src/app/_models/study-session';
 import { StudySessionService } from 'src/app/_services/study-session.service';
 import { TopicService } from 'src/app/_services/topic.service';
+import { QuillUtil } from 'src/app/_utils/quill-util';
 
 @Component({
   selector: 'app-study-session-edit',
@@ -11,6 +12,8 @@ import { TopicService } from 'src/app/_services/topic.service';
 })
 export class StudySessionEditComponent implements OnInit {
   studySession: StudySession;
+
+  modules = QuillUtil.modules;
 
   constructor(private route: ActivatedRoute, private router: Router, private topicService: TopicService,
     private studySessionService: StudySessionService) {

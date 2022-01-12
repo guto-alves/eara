@@ -30,11 +30,10 @@
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Observações sobre esta sessão de estudos</label>
-                    <textarea class="form-control" id="obs" name="obs" rows="2"
-                        [(ngModel)]="studySession.obs"></textarea>
+                    <quill-editor [styles]="{height: '200px'}" [modules]="modules" [required]="true"
+                        [(ngModel)]="studySession.obs" name="obs" placeholder="Observações">
+                    </quill-editor>
                 </div>
-
             </form>
             <div class="d-flex justify-content-center col-md-4 mx-auto">
                 <a type="button" [routerLink]="['/topic/' + studySession.topic.id]"

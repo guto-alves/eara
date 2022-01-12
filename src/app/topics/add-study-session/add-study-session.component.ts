@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { QuillUtil } from 'src/app/_utils/quill-util';
 import { StudySession } from '../../_models/study-session';
 import { TopicService } from '../../_services/topic.service';
 
@@ -10,7 +11,9 @@ import { TopicService } from '../../_services/topic.service';
 })
 export class AddStudySessionComponent implements OnInit {
   studySession: StudySession;
-  topicId: number = 0
+  topicId: number = 0;
+
+  modules = QuillUtil.modules;
 
   constructor(private route: ActivatedRoute, private router: Router, private topicService: TopicService) {
     this.studySession = new StudySession();

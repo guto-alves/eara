@@ -6,6 +6,8 @@ import { AddStudySessionComponent } from './add-study-session/add-study-session.
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StudySessionEditComponent } from './study-session-edit/study-session-edit.component';
+import { QuillModule } from 'ngx-quill';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -19,7 +21,13 @@ import { StudySessionEditComponent } from './study-session-edit/study-session-ed
     CommonModule,
     RouterModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbDropdownModule,
+    QuillModule.forRoot({
+      modules: {
+        syntax: true
+      }
+    })
   ],
   providers: [TopicService]
 })

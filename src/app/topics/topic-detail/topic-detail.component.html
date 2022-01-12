@@ -43,22 +43,17 @@
                         <td class="fw-bold text-danger">{{ session.wrongAnswers }}</td>
                         <td class="fw-bold">{{ session.totalTime }}</td>
                         <td>
-                            <div class="dropdown">
-                                <button class="btn btn-transparent btn-sm" type="button" id="dropdownMenuButton"
-                                    data-bs-toggle="dropdown" aria-expanded="false"
-                                    [id]="'dropdownMenuButton' + session.id">
+                            <div ngbDropdown class="d-inline-block" #sessiontDropdown="ngbDropdown">
+                                <button class="btn btn-transparent" id="sessiontDropdown"
+                                    (click)="$event.stopPropagation(); sessiontDropdown.open();">
                                     <i class="bi bi-three-dots"></i>
                                 </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton"
-                                    [attr.aria-labelledby]="'dropdownMenuButton' + session.id">
-                                    <li><a class="dropdown-item" href="#"
-                                            [routerLink]="['/topic/' + topic.id + '/session/' + session.id + '/edit']">Editar</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item"
-                                            (click)="showDeleteConfirmModal(session.id)">Remover</a>
-                                    </li>
-                                </ul>
+                                <div ngbDropdownMenu aria-labelledby="sessiontDropdown">
+                                    <a ngbDropdownItem href="#"
+                                        [routerLink]="['/topic/' + topic.id + '/session/' + session.id + '/edit']">Editar</a>
+                                    <button ngbDropdownItem
+                                        (click)="studySessionIdDeleted = session.id; openModal(deleteSessionModal, session)">Remover</button>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -84,23 +79,17 @@
         </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="confirmDeleteSessionModal" tabindex="-1"
-        aria-labelledby="confirmDeleteSessionModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="confirmDeleteSessionModalLabel">Excluir Sessão de Estudo</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Tem certeza de que deseja excluir a sessão de estudo?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-danger" (click)="deleteStudySession()">Remover</button>
-                </div>
-            </div>
+    <ng-template #deleteSessionModal let-modal>
+        <div class="modal-header">
+            <h5 class="modal-title">Excluir Sessão de Estudo</h5>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
         </div>
-    </div>
+        <div class="modal-body">
+            Tem certeza de que deseja excluir a sessão de estudo?
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="modal.dismiss()" ngbAutofocus>Cancelar</button>
+            <button type="button" class="btn btn-danger" (click)="deleteStudySession()" ngbAutofocus>Excluir</button>
+        </div>
+    </ng-template>
 </div>

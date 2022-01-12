@@ -6,8 +6,9 @@
                 <h5 class="fw-bold">{{ project.name }}</h5>
 
                 <div ngbDropdown class="d-inline-block" #projectDropdown="ngbDropdown">
-                    <button class="btn btn-transparent" id="projectDropdown">
-                        <i class="bi bi-three-dots" (click)="$event.stopPropagation(); projectDropdown.open();"></i>
+                    <button class="btn btn-transparent" id="projectDropdown"
+                        (click)="$event.stopPropagation(); projectDropdown.open();">
+                        <i class="bi bi-three-dots"></i>
                     </button>
                     <div ngbDropdownMenu aria-labelledby="projectDropdown">
                         <button ngbDropdownItem (click)="openModal(updateProjectModal)">Editar</button>

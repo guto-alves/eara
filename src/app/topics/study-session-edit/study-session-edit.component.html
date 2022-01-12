@@ -29,10 +29,10 @@
                     </div>
                 </div>
 
-                <div class="mb-4">
-                    <label class="form-label">Observações</label>
-                    <textarea class="form-control" id="obs" name="obs" rows="2"
-                        [(ngModel)]="studySession.obs"></textarea>
+                <div class="mb-3">
+                    <quill-editor [styles]="{height: '200px'}" [modules]="modules" [required]="true"
+                        [(ngModel)]="studySession.obs" name="obs" placeholder="Observações sobre a sessão">
+                    </quill-editor>
                 </div>
             </form>
             <div class="d-flex justify-content-center col-md-4 mx-auto">

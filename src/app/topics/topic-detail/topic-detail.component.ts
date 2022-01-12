@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { StudySession } from 'src/app/_models/study-session';
 import { StudySessionService } from 'src/app/_services/study-session.service';
 import { Topic } from '../../_models/topic';
 import { TopicService } from '../../_services/topic.service';
-
-declare var $: any;
 
 @Component({
   selector: 'app-topic-detail',
@@ -13,13 +12,16 @@ declare var $: any;
   styleUrls: ['./topic-detail.component.css']
 })
 export class TopicDetailComponent implements OnInit {
-  topic: Topic;
+  topic = new Topic('');
 
-  private studySessionIdDeleted: number = -1;
+  studySessionIdDeleted: number = -1;
 
-  constructor(private route: ActivatedRoute, private router: Router, private topicService: TopicService,
+  constructor(private modalService: NgbModal, private route: ActivatedRoute, private router: Router, private topicService: TopicService,
     private studySessionService: StudySessionService) {
-    this.topic = new Topic('');
+  }
+
+  openModal(content: any, session: StudySession): void {
+    this.modalService.open(content, { centered: true });
   }
 
   ngOnInit(): void {
@@ -31,11 +33,6 @@ export class TopicDetailComponent implements OnInit {
         error: (e) => console.log(e),
       });
     }
-  }
-
-  showDeleteConfirmModal(studySessionId: number) {
-    this.studySessionIdDeleted = studySessionId;
-    $('#confirmDeleteSessionModal').modal('toggle');
   }
 
   deleteStudySession() {
@@ -63,8 +60,7 @@ export class TopicDetailComponent implements OnInit {
         });
 
         this.studySessionIdDeleted = -1;
-
-        $('#confirmDeleteSessionModal').modal('toggle');
+        this.modalService.dismissAll();
       },
       error: (error) => console.log(error)
     });
