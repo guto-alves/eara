@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Project } from 'src/app/_models/project';
@@ -19,10 +19,13 @@ export class ProjectDetailComponent implements OnInit {
   projectUpdated: Project = new Project();
 
   subjects: Subject[] = [];
+  
+  subjectFormVisible: boolean = false;
 
-  showSubjectForm = false;
+  @ViewChild('newSubject', { static: false }) 
+  newSubject?: ElementRef;
 
-  newProjectErrorMessage = '';
+  projectErrorMessage = '';
 
   constructor(private router: Router, private route: ActivatedRoute,
     private projectService: ProjectService, private subjectService: SubjectService,
@@ -56,7 +59,7 @@ export class ProjectDetailComponent implements OnInit {
     this.subjectService.addSubject(subject).subscribe({
       next: (newSubject) => {
         this.subjects.push(newSubject);
-        this.showSubjectForm = true;
+        this.showSubjectForm();
       },
       error: (error) => console.log(error)
     });
@@ -80,7 +83,7 @@ export class ProjectDetailComponent implements OnInit {
 
   updateProject(): void {
     if (Project.isLightColor(this.projectUpdated.color)) {
-      this.newProjectErrorMessage = 'Escolha uma cor uma pouco mais escura!';
+      this.projectErrorMessage = 'Escolha uma cor uma pouco mais escura!';
       return;
     }
 
@@ -90,7 +93,7 @@ export class ProjectDetailComponent implements OnInit {
         this.modalService.dismissAll();
       },
       error: (e) => {
-        this.newProjectErrorMessage = e;
+        this.projectErrorMessage = e;
       }
     });
   }
@@ -114,6 +117,11 @@ export class ProjectDetailComponent implements OnInit {
     project1.color = project2.color;
     localStorage.setItem('color', this.project.color || '#0d6efd');
     $('nav').attr('style', `background-color: ${this.project.color} !important`);
+  }
+
+  showSubjectForm(): void {
+    this.subjectFormVisible = true;
+    setTimeout(() => this.newSubject?.nativeElement.focus());
   }
 
 }

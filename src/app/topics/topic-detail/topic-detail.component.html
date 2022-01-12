@@ -17,7 +17,7 @@
     <div class="card">
         <h5 class="card-header bg-white text-center">Sessões de estudos</h5>
         <div class="card-body">
-            <table class="table table-hover text-center">
+            <table class="table table-hover text-center" *ngIf="topic.sessions.length">
                 <thead>
                     <tr class="align-middle">
                         <th></th>
@@ -73,6 +73,8 @@
                     </tr>
                 </tbody>
             </table>
+
+            <div class="text-center" *ngIf="!topic.sessions.length">Nenhuma sessão de estudo.</div>
 
             <div class="d-flex justify-content-end">
                 <a class="btn btn-primary btn-sm" [routerLink]="['/topic/' + topic.id + '/session']"

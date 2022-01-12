@@ -31,8 +31,9 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
 
-                <ngb-alert type="danger" *ngIf="newProjectErrorMessage" (closed)="newProjectErrorMessage = ''">{{
-                    newProjectErrorMessage }}</ngb-alert>
+                <ngb-alert type="danger" *ngIf="projectErrorMessage" (closed)="projectErrorMessage = ''">
+                    {{ projectErrorMessage }}
+                </ngb-alert>
 
                 <div class="mb-3">
                     <label for="name" class="form-label">Nome do Projeto</label>
@@ -74,7 +75,7 @@
     <ngb-accordion #acc="ngbAccordion">
         <ngb-panel *ngFor="let subject of subjects" [title]="subject.name">
             <ng-template ngbPanelContent>
-                <table class="table table-sm table-hover text-center">
+                <table class="table table-sm table-hover text-center" *ngIf="subject.topics.length">
                     <thead>
                         <tr class="align-middle">
                             <th class="mt-1 text-center">Tópico</th>
@@ -104,12 +105,13 @@
                     </tbody>
                 </table>
 
-                <small *ngIf="subject.topics.length == 0">
+                <div class="text-center" *ngIf="subject.topics.length == 0">
                     Esta disciplina não tem nenhum tópico ainda
-                </small>
+                </div>
 
-                <div class="d-flex justify-content-end">
-                    <input #newTopic type="text" class="new-topic-input form-control w-50" placeholder="Nome do tópico"
+                <div class="d-flex justify-content-end mt-4">
+                    <input #newTopic type="text" class="new-topic-input form-control w-50"
+                        placeholder="Digite o nome do tópico"
                         (keyup.enter)="addTopic(newTopic.value, subject.id); newTopic.value = '' "
                         onclick="this.select()">
                     <button type="button" class="btn btn-primary btn-sm" title="Adicionar novo tópico"
@@ -119,13 +121,13 @@
                 </div>
             </ng-template>
         </ngb-panel>
-        <ngb-panel *ngIf="showSubjectForm">
+        <ngb-panel *ngIf="subjectFormVisible">
             <ng-template ngbPanelHeader>
                 <div class="d-flex align-items-center justify-content-between p-2">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Nome da disciplina" #newSubject
                             (keyup.enter)="addSubject(newSubject.value); newSubject.value = '' ">
-                        <button class="btn btn-danger" type="submit" (click)="showSubjectForm = false">
+                        <button class="btn btn-danger" type="submit" (click)="subjectFormVisible = false">
                             <i class="bi bi-x-lg"></i>
                         </button>
                     </div>
@@ -135,7 +137,7 @@
     </ngb-accordion>
 
     <div class="d-flex justify-content-end my-3">
-        <button class="btn btn-primary" (click)="showSubjectForm = true"><i class="bi bi-plus-lg"></i> Adicionar
-            Disciplina</button>
+        <button class="btn btn-primary" (click)="showSubjectForm()">
+            <i class="bi bi-plus-lg"></i> Adicionar Disciplina</button>
     </div>
 </div>
