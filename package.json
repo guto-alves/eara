@@ -6,8 +6,7 @@
     "config": "ts-node ./src/assets/scripts/setEnv.ts",
     "start": "node server.js",
     "build": "npm run config -- --environment=prod && ng build",
-    "watch": "ng build --watch --configuration development",
-    "heroku-postbuild": "ng build"
+    "watch": "ng build --watch --configuration development"
   },
   "private": true,
   "dependencies": {
