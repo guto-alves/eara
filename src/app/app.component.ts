@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 import { User } from './_models/user';
 import { AuthenticationService } from './_services/authentication.service';
 
@@ -22,6 +23,8 @@ export class AppComponent implements OnInit {
         this.isAuthenticated = this.currentUser != null;
       }
     });
+
+    console.log(environment.REST_API_URL);
   }
 
   ngOnInit(): void {
