@@ -6,10 +6,10 @@ import { TopicService } from '../../_services/topic.service';
 
 @Component({
   selector: 'app-add-study-session',
-  templateUrl: './add-study-session.component.html',
-  styleUrls: ['./add-study-session.component.css']
+  templateUrl: './study-session-add.component.html',
+  styleUrls: ['./study-session-add.component.css']
 })
-export class AddStudySessionComponent implements OnInit {
+export class StudySessionAddComponent implements OnInit {
   studySession: StudySession;
   topicId: number = 0;
 

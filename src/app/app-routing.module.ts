@@ -4,7 +4,7 @@ import { LoginComponent } from './login/login/login.component';
 import { RegisterComponent } from './login/register/register.component';
 import { ProjectDetailComponent } from './projects/project-detail/project-detail.component';
 import { ProjectsComponent } from './projects/projects/projects.component';
-import { AddStudySessionComponent } from './topics/add-study-session/add-study-session.component';
+import { StudySessionAddComponent } from './topics/study-session-add/study-session-add.component';
 import { StudySessionEditComponent } from './topics/study-session-edit/study-session-edit.component';
 import { TopicDetailComponent } from './topics/topic-detail/topic-detail.component';
 import { UserAccountEditComponent } from './users/user-account-edit/user-account-edit.component';
@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'projects', component: ProjectsComponent, canActivate: [AuthGuard] },
   { path: 'projects/:id', component: ProjectDetailComponent, canActivate: [AuthGuard] },
   { path: 'topic/:id', component: TopicDetailComponent, canActivate: [AuthGuard] },
-  { path: 'topic/:id/session', component: AddStudySessionComponent, canActivate: [AuthGuard] },
+  { path: 'topic/:id/session', component: StudySessionAddComponent, canActivate: [AuthGuard] },
   { path: 'topic/:topicId/session/:sessionId/edit', component: StudySessionEditComponent, canActivate: [AuthGuard] },
   { path: 'user/edit-profile', component: UserProfileEditComponent, canActivate: [AuthGuard] },
   { path: 'user/edit-account', component: UserAccountEditComponent, canActivate: [AuthGuard] },
